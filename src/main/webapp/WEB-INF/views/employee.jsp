@@ -6,6 +6,8 @@
 <title>Insert title here</title>
 	<%@include file="/WEB-INF/views/common.jsp" %>
 	<script type="text/javascript" src="/js/views/employee.js"></script>
+	
+	
 </head>
 <body>
 
@@ -55,47 +57,69 @@
 	
 	<div id="employee_dialog" class="easyui-dialog" >
 		<form id="employee_form" action="" method="post">
-			<table align="center" style="margin-top: 10px;">
 				<input type="hidden" name="id" />
-				<tr>
-					<td>用户名：</td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr>
-					<td>真实姓名：</td>
-					<td><input type="text" name="realname"></td>
-				</tr>
-				<tr>
-					<td>密码：</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td>电话：</td>
-					<td><input type="text" name="tel"></td>
-				</tr>
-				<tr>
-					<td>Email：</td>
-					<td><input type="text" name="email" class="easyui-validatebox"
-						data-options="validType:'email'"></td>
-				</tr>
-				<tr>
-					<td>入职时间：</td>
-					<td><input type="date" name="inputtime"></td>
-				</tr>
-				<tr>
-					<td>部门：</td>
-					<td><select id="dept_id" class="easyui-combobox"
-						name="dept.id" style="width: 150px;">
-							<option value="1">总经办</option>
-							<option value="2">市场部</option>
-							<option value="3">研发部</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>是否管理员：</td>
-					<td><input type="checkbox" name="admin" value="0"></td>
-				</tr>
-			</table>
+				<table style="margin-top: 10px">
+					<tr>
+						<td>
+						<table style="width:250px;height:400px;">
+							<tr>
+								<td>用户名：</td>
+								<td><input type="text" name="username"></td>
+							</tr>
+							<tr>
+								<td>真实姓名：</td>
+								<td><input type="text" name="realname"></td>
+							</tr>
+							<tr>
+								<td>密码：</td>
+								<td><input type="password" name="password"></td>
+							</tr>
+							<tr>
+								<td>电话：</td>
+								<td><input type="text" name="tel"></td>
+							</tr>
+							<tr>
+								<td>Email：</td>
+								<td><input type="text" name="email" class="easyui-validatebox"
+									data-options="validType:'email'"></td>
+							</tr>
+							<tr>
+								<td>入职时间：</td>
+								<td><input type="date" name="inputtime"></td>
+							</tr>
+							<tr>
+								<td>部门：</td>
+								<td><select id="dept_id" class="easyui-combobox"
+									name="dept.id" style="width: 150px;">
+								</select></td>
+							</tr>
+							<tr>
+								<td>是否管理员：</td>
+								<td><input type="checkbox" name="admin" value="0"></td>
+							</tr>
+						</table>
+				</td>
+				<td>
+						<table id="self_role_datagrid" class="easyui-datagrid" style="width:220px;height:400px;">
+							<thead>
+								<tr>
+									<th field="name" halign="center" width="1">权限名称</th>
+								</tr>
+							</thead>
+						</table>
+				</td>
+				<td style="width: 30px"></td>
+				<td >
+						<table id="all_role_datagrid" class="easyui-datagrid" style="width:220px;height:400px;">
+							<thead>
+								<tr>
+									<th field="name" halign="center" width="1">权限名称</th>
+								</tr>
+							</thead>
+	  					</table>
+	  					</td>
+	  		     </tr>
+				</table>
 		</form>
 	</div> 
 	

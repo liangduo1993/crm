@@ -1,6 +1,8 @@
 package com._520it.crm.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,6 +36,9 @@ public class Employee {
     private Boolean state = true;
 
     private Boolean admin = false;
+    
+    private List<Role> roles = new ArrayList<>();
+    
 
 	@Override
 	public String toString() {

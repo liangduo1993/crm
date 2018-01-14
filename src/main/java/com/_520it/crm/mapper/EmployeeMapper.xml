@@ -107,4 +107,13 @@
   	where e.username=#{username} and e.password=#{password}
   </select>
   
+  <insert id="handleRelationWithRole"  >
+    insert into employee_role (employee_id,role_id)
+    values (#{employee_id}, #{role_id})
+  </insert>
+  
+  <delete id="removeRelationWithRole" parameterType="Long" >
+    delete from employee_role
+    where employee_id = #{id}
+  </delete>
 </mapper>

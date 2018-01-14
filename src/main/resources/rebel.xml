@@ -15,6 +15,11 @@
 
 	<web>
 		<link target="/">
+			<dir name="C:/Users/Liang/Java/myCrm/target/m2e-wtp/web-resources">
+				<exclude name="/"/>
+			</dir>
+		</link>
+		<link target="/">
 			<dir name="C:/Users/Liang/Java/myCrm/src/main/webapp">
 			</dir>
 		</link>

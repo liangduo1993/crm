@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com._520it.crm.domain.Employee;
+import com._520it.crm.domain.Role;
 import com._520it.crm.mapper.EmployeeMapper;
 import com._520it.crm.page.PageResult;
 import com._520it.crm.query.QueryObject;
@@ -19,15 +20,23 @@ public class EmployeeServiceImpl implements IEmployeeService{
 		
 	
 	public int save(Employee e) {
-		return dao.insert(e);
+		int effectCount = dao.insert(e);
+		List<Role> roles = e.getRoles();
+		for (Role role : roles) {
+			dao.handleRelationWithRole(e.getId(), role.getId());
+		}
+		return effectCount;
 	}
 
-	public int delete(Long id) {
-		return dao.deleteByPrimaryKey(id);
-	}
 
 	public int update(Employee e) {
-		return dao.updateByPrimaryKey(e);
+		dao.removeRelationWithRole(e.getId());
+		int effectCount = dao.updateByPrimaryKey(e);
+		List<Role> roles = e.getRoles();
+		for (Role role : roles) {
+			dao.handleRelationWithRole(e.getId(), role.getId());
+		}
+		return effectCount;
 	}
 
 	public Employee get(Long id) {
@@ -57,6 +66,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	public int changeState(Long id) {
 		return dao.changeState(id);
 	}
+	
 	
 
 }

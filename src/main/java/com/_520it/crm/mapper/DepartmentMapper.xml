@@ -5,9 +5,15 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="sn" jdbcType="VARCHAR" property="sn" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="state" jdbcType="BIT" property="state" />
+    <association property="manager" javaType="Employee" columnPrefix="mgr_">
+    	<id property="id" column="id"/>
+    	<result property="username" column="username"/>
+    </association>
+   	<association property="parentDept" javaType="Department" columnPrefix="parent_">
+   		<id property="id" column="id"/>
+   		<result property="name" column="name"/>
+   	</association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from department
@@ -16,25 +22,25 @@
   <insert id="insert" keyProperty="id" parameterType="com._520it.crm.domain.Department" useGeneratedKeys="true">
     insert into department (sn, name, manager_id, 
       parent_id, state)
-    values (#{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{managerId,jdbcType=BIGINT}, 
-      #{parentId,jdbcType=BIGINT}, #{state,jdbcType=BIT})
+    values (#{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{manager.id,jdbcType=BIGINT}, 
+      #{parentDept.id,jdbcType=BIGINT}, #{state,jdbcType=BIT})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com._520it.crm.domain.Department">
     update department
     set sn = #{sn,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      manager_id = #{managerId,jdbcType=BIGINT},
-      parent_id = #{parentId,jdbcType=BIGINT},
+      manager_id = #{manager.id,jdbcType=BIGINT},
+      parent_id = #{parentDept.id,jdbcType=BIGINT},
       state = #{state,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, sn, name, manager_id, parent_id, state
-    from department
-    where id = #{id,jdbcType=BIGINT}
+    select d.id, d.sn, d.name,  d.state, mgr.id as mgr_id, mgr.username as mgr_username, p.id as parent_id, p.name as parent_name 
+    from department d left join employee mgr on d.manager_id=mgr.id left join department p on d.parent_id=p.id
+    where d.id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, sn, name, manager_id, parent_id, state
+    select id, name
     from department
   </select>
   

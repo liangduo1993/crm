@@ -10,7 +10,6 @@ import com._520it.crm.query.QueryObject;
 
 public interface IEmployeeService {
 	int save(Employee e);
-	int delete(Long id);
 	int update(Employee e);
 	Employee get(Long id);
 	List<Employee> selectAll();
